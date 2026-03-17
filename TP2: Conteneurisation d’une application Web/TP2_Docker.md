@@ -118,7 +118,6 @@ docker build -t my_lamp .
 docker images
 ```
 ![alt text](image-6.png)
-
 *Figure 3 : Construction de l’image `my_lamp` et vérification via `docker images`*
 
 ---
@@ -171,8 +170,9 @@ docker logs -ft my_lamp_c
 
 1. Ajouter un nouvel article depuis l’interface.
 
-![alt text](image-9.png)
 
+![alt text](image-9.png)
+*Figure 6 : Ajout d’un nouvel article via l’interface*
 
 2. Détruire puis recréer le conteneur :
 
@@ -182,8 +182,9 @@ docker rm my_lamp_c
 docker run -d --name my_lamp_c -p 8080:80 my_lamp
 docker exec my_lamp_c chmod 777 -R /var/www/html
 ```
-![alt text](image-10.png)
 
+![alt text](image-10.png)
+*Figure 7 : Suppression et recréation du conteneur (exécution des commandes)*
 
 3. Vérifier l’existence de l’article déjà ajouté.
 
@@ -192,7 +193,7 @@ docker exec my_lamp_c chmod 777 -R /var/www/html
 > ✏️ **Réponse :** l’article est perdu, car les données de la base étaient stockées dans le conteneur supprimé (pas de volume persistant).
 
 ![alt text](image-11.png)
-*Figure 6 : Perte des données après suppression/recréation du conteneur sans volume (Liste vide)*
+*Figure 8 : Perte des données après suppression/recréation du conteneur sans volume (Liste vide)*
 
 ---
 
@@ -212,7 +213,7 @@ docker volume create --name mysqldata
 docker volume ls
 ```
 ![alt text](image-12.png)
-
+*Figure 9 : Liste des volumes Docker (`docker volume ls`)*
 
 3. Exécuter le conteneur avec le volume :
 
@@ -220,7 +221,7 @@ docker volume ls
 docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 ```
 ![alt text](image-13.png)
-
+*Figure 10 : Exécution du conteneur avec le volume `mysqldata` monté*
 
 4. **Expliquez l’option `-v mysqldata:/var/lib/mysql` :**
 
@@ -233,6 +234,7 @@ docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 
 1. Ajouter un article via `http://localhost:8080/`.
 ![alt text](image-14.png)
+*Figure 11 : Ajout d’un article via l’application (avec volume monté)*
 2. Détruire puis recréer le conteneur avec le même volume :
 
 ```bash
@@ -248,7 +250,7 @@ docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 > ✏️ **Réponse :** l’article est conservé, car la base de données est stockée dans le volume `mysqldata`, indépendant du cycle de vie du conteneur.
 
 ![alt text](image-15.png)
-*Figure 8 : Données conservées après recréation du conteneur grâce au volume*
+*Figure 12 : Données conservées après recréation du conteneur grâce au volume*
 
 ---
 
@@ -262,11 +264,11 @@ docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 docker network ls
 ```
 ![alt text](image-16.png)
-*Figure 9 : Liste des réseaux Docker (`docker network ls`)*
+*Figure 13 : Liste des réseaux Docker (`docker network ls`)*
 
 2. Donner l’adresse IP de la machine hôte.
 ![alt text](image-18.png)
-
+*Figure 14 : Adresse IP de la machine hôte (extrait)*
 3. Afficher l’adresse IP du conteneur :
 
 ```bash
@@ -274,11 +276,11 @@ docker exec my_lamp_c ip add
 ```
 
 ![alt text](image-17.png)
-*Figure 10 : Adresse IP de `my_lamp_c` sur le réseau bridge*
+*Figure 15 : Adresse IP du conteneur `my_lamp_c` sur le réseau bridge*
 
 4. Vérifier qu’ils sont sur le même réseau bridge.
 ![alt text](image-19.png)
-
+*Figure 16 : Vérification du réseau bridge et correspondance des subnets*
 > ✏️ **Réponse :** le conteneur est attaché au réseau bridge Docker (interface `docker0` côté hôte) et reçoit une IP privée de ce sous-réseau.
 
 
@@ -317,7 +319,7 @@ docker images
 ```
 
 ![Connexion Docker Hub et tag image](image-10.png)
-*Figure 11 : Connexion à Docker Hub et ajout du tag à `my_lamp`*
+*Figure 17 : Connexion à Docker Hub et ajout du tag à `my_lamp`*
 
 ---
 
@@ -332,7 +334,7 @@ docker push <HUB-USER>/<REPONAME>:first
 > ✏️ **Réponse :** l’image est visible dans le repository Docker Hub après le `push`.
 
 ![Push vers Docker Hub](image-11.png)
-*Figure 12 : Publication de l’image sur Docker Hub*
+*Figure 18 : Publication de l’image sur Docker Hub*
 
 ---
 
@@ -350,9 +352,11 @@ docker push <HUB-USER>/<REPONAME>:first
 
 *Fin du TP 2 — Conteneurisation d’une application Web*
 
+
 ## Modifications apportées au TP
 
 ![alt text](<Screenshot from 2026-03-17 13-00-21.png>)
+*Figure 19 : Capture d’écran montrant le problème détecté lors du démarrage (import SQL échoué)*
 
 Pour améliorer la robustesse et la maintenabilité de la stack LAMP fournie, nous avons apporté les modifications suivantes :
 
@@ -362,15 +366,15 @@ Pour améliorer la robustesse et la maintenabilité de la stack LAMP fournie, no
 
 Motifs : fiabilité du démarrage (éviter les erreurs d'import SQL causées par MariaDB non initialisé), éviter un ré-import à chaque redémarrage, et respecter les bonnes pratiques Docker (script de démarrage exécutable, `ENTRYPOINT` en forme JSON).
 
-Captures (remplacez ces fichiers par vos captures réelles) :
+Captures :
 
 ![alt text](image-3.png)
-*Figure 13 : Contenu du script `start.sh` ajouté*
+*Figure 20 : Contenu du script `start.sh` ajouté*
 
 ![alt text](image-4.png)
-*Figure 14 : Extrait du `Dockerfile` montrant la copie et l'ENTRYPOINT*
+*Figure 21 : Extrait du `Dockerfile` montrant la copie et l'ENTRYPOINT*
 
 ![alt text](image-2.png)
-*Figure 15 : Exemple de sortie de `docker build` / `docker run` montrant l'image `my_lamp` démarrée*
+*Figure 22 : Exemple de sortie de `docker build` / `docker run` montrant l'image `my_lamp` démarrée*
 
-Si vous le souhaitez, je peux remplacer le `sleep 5` du script `start.sh` par une boucle d'attente qui teste la disponibilité de MariaDB (plus fiable). Dites-moi si je dois appliquer cette amélioration.
+
