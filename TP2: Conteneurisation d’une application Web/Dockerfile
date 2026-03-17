@@ -1,6 +1,9 @@
 # --------------- DÉBUT COUCHE OS -------------------
 FROM ubuntu:latest
 # --------------- FIN COUCHE OS ---------------------
+# --------------- DÉBUT COUCHE OS -------------------
+FROM ubuntu:latest
+# --------------- FIN COUCHE OS ---------------------
 
 # MÉTADONNÉES DE L'IMAGE
 LABEL version="1.0" maintainer="CHAANBI Talel <talel.chaanbi@etudiant-isi.utm.tn>"
@@ -34,5 +37,9 @@ EXPOSE 80
 # RÉPERTOIRE DE TRAVAIL
 WORKDIR ${DOCUMENTROOT}
 
+# COPIER LE SCRIPT DE DÉMARRAGE
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
 # DÉMARRAGE DES SERVICES LORS DE L'EXÉCUTION DE L'IMAGE
-ENTRYPOINT service mariadb start && mysql < /articles.sql && apache2ctl -D FOREGROUND
+ENTRYPOINT ["/start.sh"]
