@@ -1,15 +1,15 @@
 <div class="cover-page">
 
-<h1>Travaux Pratiques 2 : Conteneurisation d’une application Web</h1>
+    <h1>Travaux Pratiques 2 : Conteneurisation d’une application Web</h1>
 
-<p class="cover-org"><strong>Institut Supérieur d'Informatique</strong></p>
-<p class="cover-org"><strong>Département Génie des Télécommunications et Réseaux (GTR)</strong></p>
+    <p class="cover-org"><strong>Institut Supérieur d'Informatique</strong></p>
+    <p class="cover-org"><strong>Département Génie des Télécommunications et Réseaux (GTR)</strong></p>
 
-<p class="cover-meta"><strong>Module :</strong> Cloud Computing &amp; Virtualisation</p>
-<p class="cover-meta"><strong>Groupes :</strong> M1 SSII</p>
-<p class="cover-meta"><strong>Enseignant :</strong> Safa Réjichi</p>
-<p class="cover-meta"><strong>Mail :</strong> talel.chaanbi@etudiant-isi.utm.tn</p>
-<p class="cover-meta"><strong>Réalisé par :</strong> CHAANBI Talel</p>
+    <p class="cover-meta"><strong>Module :</strong> Cloud Computing &amp; Virtualisation</p>
+    <p class="cover-meta"><strong>Groupes :</strong> M1 SSII</p>
+    <p class="cover-meta"><strong>Enseignant :</strong> Safa Réjichi</p>
+    <p class="cover-meta"><strong>Mail :</strong> talel.chaanbi@etudiant-isi.utm.tn</p>
+    <p class="cover-meta"><strong>Réalisé par :</strong> CHAANBI Talel</p>
 
 </div>
 
@@ -41,7 +41,7 @@ sources/
 
 3. Créez un fichier `Dockerfile` à la racine du projet.
 
-![Arborescence du projet TP2](image-1.png)
+![Arborescence du projet TP2](image.png)
 *Figure 1 : Arborescence du projet TP2 (sources/app, sources/db, Dockerfile)*
 
 ---
@@ -103,7 +103,7 @@ ENTRYPOINT service mariadb start && mysql < /articles.sql && apache2ctl -D FOREG
 > - Exposition du port `80`.
 > - Démarrage MariaDB + import SQL + lancement Apache au démarrage du conteneur.
 
-![Contenu du Dockerfile](image-2.png)
+![alt text](image-1.png)
 *Figure 2 : Contenu du Dockerfile de la stack LAMP*
 
 ---
@@ -118,7 +118,7 @@ docker build -t my_lamp .
 docker images
 ```
 
-![Build de l’image my_lamp](image-3.png)
+![Build de l’image my_lamp](image-2.png)
 *Figure 3 : Construction de l’image `my_lamp` et vérification via `docker images`*
 
 ---
@@ -159,10 +159,10 @@ docker logs -ft my_lamp_c
 
 - URL : `http://localhost:8080/`
 
-![Exécution du conteneur my_lamp_c](image-4.png)
+![Exécution du conteneur my_lamp_c](image-3.png)
 *Figure 4 : Lancement du conteneur `my_lamp_c` et vérification du statut*
 
-![Application Web accessible](image-5.png)
+![Application Web accessible](image-4.png)
 *Figure 5 : Affichage de l’application sur `http://localhost:8080/`*
 
 ---
@@ -185,7 +185,7 @@ docker exec my_lamp_c chmod 777 -R /var/www/html
 
 > ✏️ **Réponse :** l’article est perdu, car les données de la base étaient stockées dans le conteneur supprimé (pas de volume persistant).
 
-![Test de persistance sans volume](image-6.png)
+![Test de persistance sans volume](image-5.png)
 *Figure 6 : Perte des données après suppression/recréation du conteneur sans volume*
 
 ---
@@ -216,7 +216,7 @@ docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 
 > ✏️ **Réponse :** le volume Docker `mysqldata` est monté dans `/var/lib/mysql` du conteneur, ce qui rend les données MariaDB persistantes.
 
-![Création et montage du volume](image-7.png)
+![Création et montage du volume](image-6.png)
 *Figure 7 : Création du volume `mysqldata` et montage dans le conteneur*
 
 ---
@@ -238,7 +238,7 @@ docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 
 > ✏️ **Réponse :** l’article est conservé, car la base de données est stockée dans le volume `mysqldata`, indépendant du cycle de vie du conteneur.
 
-![Persistance des données avec volume](image-8.png)
+![Persistance des données avec volume](image-7.png)
 *Figure 8 : Données conservées après recréation du conteneur grâce au volume*
 
 ---
@@ -266,10 +266,10 @@ docker exec my_lamp_c ip add
 
 > ✏️ **Réponse :** le conteneur est attaché au réseau bridge Docker (interface `docker0` côté hôte) et reçoit une IP privée de ce sous-réseau.
 
-![Réseaux Docker](image-9.png)
+![Réseaux Docker](image-8.png)
 *Figure 9 : Liste des réseaux Docker (`docker network ls`)*
 
-![Adresse IP du conteneur](image-10.png)
+![Adresse IP du conteneur](image-9.png)
 *Figure 10 : Adresse IP de `my_lamp_c` sur le réseau bridge*
 
 ---
@@ -303,7 +303,7 @@ docker tag my_lamp <HUB-USER>/<REPONAME>:first
 docker images
 ```
 
-![Connexion Docker Hub et tag image](image-11.png)
+![Connexion Docker Hub et tag image](image-10.png)
 *Figure 11 : Connexion à Docker Hub et ajout du tag à `my_lamp`*
 
 ---
@@ -318,7 +318,7 @@ docker push <HUB-USER>/<REPONAME>:first
 
 > ✏️ **Réponse :** l’image est visible dans le repository Docker Hub après le `push`.
 
-![Push vers Docker Hub](image-12.png)
+![Push vers Docker Hub](image-11.png)
 *Figure 12 : Publication de l’image sur Docker Hub*
 
 ---
