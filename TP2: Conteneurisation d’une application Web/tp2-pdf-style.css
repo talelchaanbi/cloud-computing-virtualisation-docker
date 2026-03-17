@@ -7,6 +7,8 @@ body {
   font-size: 11pt;
   line-height: 1.4;
   color: #1f2937;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .cover-page {
@@ -68,10 +70,19 @@ h3, h4 {
 }
 
 p, li {
-  text-align: justify;
-  margin: 4px 0;
+  text-align: left;
+  text-indent: 0;
+  margin: 2px 0;
   orphans: 3;
   widows: 3;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+ul, ol {
+  margin: 4px 0 6px 18px;
+  padding: 0;
 }
 
 code {
