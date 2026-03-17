@@ -211,25 +211,28 @@ docker volume create --name mysqldata
 ```bash
 docker volume ls
 ```
+![alt text](image-12.png)
+
 
 3. Exécuter le conteneur avec le volume :
 
 ```bash
 docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 ```
+![alt text](image-13.png)
+
 
 4. **Expliquez l’option `-v mysqldata:/var/lib/mysql` :**
 
 > ✏️ **Réponse :** le volume Docker `mysqldata` est monté dans `/var/lib/mysql` du conteneur, ce qui rend les données MariaDB persistantes.
 
-![Création et montage du volume](image-6.png)
-*Figure 7 : Création du volume `mysqldata` et montage dans le conteneur*
 
 ---
 
 ### II. Vérification de la persistance avec volume
 
 1. Ajouter un article via `http://localhost:8080/`.
+![alt text](image-14.png)
 2. Détruire puis recréer le conteneur avec le même volume :
 
 ```bash
@@ -244,7 +247,7 @@ docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 
 > ✏️ **Réponse :** l’article est conservé, car la base de données est stockée dans le volume `mysqldata`, indépendant du cycle de vie du conteneur.
 
-![Persistance des données avec volume](image-7.png)
+![alt text](image-15.png)
 *Figure 8 : Données conservées après recréation du conteneur grâce au volume*
 
 ---
@@ -258,25 +261,32 @@ docker run -d --name my_lamp_c -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp
 ```bash
 docker network ls
 ```
+![alt text](image-16.png)
+*Figure 9 : Liste des réseaux Docker (`docker network ls`)*
 
 2. Donner l’adresse IP de la machine hôte.
+![alt text](image-18.png)
+
 3. Afficher l’adresse IP du conteneur :
 
 ```bash
 docker exec my_lamp_c ip add
 ```
 
+![alt text](image-17.png)
+*Figure 10 : Adresse IP de `my_lamp_c` sur le réseau bridge*
+
 4. Vérifier qu’ils sont sur le même réseau bridge.
+![alt text](image-19.png)
+
 
 **Interprétation :**
 
 > ✏️ **Réponse :** le conteneur est attaché au réseau bridge Docker (interface `docker0` côté hôte) et reçoit une IP privée de ce sous-réseau.
 
-![Réseaux Docker](image-8.png)
-*Figure 9 : Liste des réseaux Docker (`docker network ls`)*
 
-![Adresse IP du conteneur](image-9.png)
-*Figure 10 : Adresse IP de `my_lamp_c` sur le réseau bridge*
+
+
 
 ---
 
