@@ -7,7 +7,7 @@
 **Groupes :** M1 SSII  
 **Enseignant :** Safa Réjichi  
 **Mail :** talel.chaanbi@etudiant-isi.utm.tn  
-**Réalisé par :** CHAANBI Talel
+**Réalisé par :** Talel Chaanbi
 
 ## Objectifs
 
