@@ -1,17 +1,13 @@
-<div class="cover-page">
+# Travaux Pratiques 2 : Conteneurisation d’une application Web
 
-    <h1>Travaux Pratiques 2 : Conteneurisation d’une application Web</h1>
+**Institut Supérieur d'Informatique**  
+**Département Génie des Télécommunications et Réseaux (GTR)**
 
-    <p class="cover-org"><strong>Institut Supérieur d'Informatique</strong></p>
-    <p class="cover-org"><strong>Département Génie des Télécommunications et Réseaux (GTR)</strong></p>
-
-    <p class="cover-meta"><strong>Module :</strong> Cloud Computing &amp; Virtualisation</p>
-    <p class="cover-meta"><strong>Groupes :</strong> M1 SSII</p>
-    <p class="cover-meta"><strong>Enseignant :</strong> Safa Réjichi</p>
-    <p class="cover-meta"><strong>Mail :</strong> talel.chaanbi@etudiant-isi.utm.tn</p>
-    <p class="cover-meta"><strong>Réalisé par :</strong> CHAANBI Talel</p>
-
-</div>
+**Module :** Cloud Computing & Virtualisation  
+**Groupes :** M1 SSII  
+**Enseignant :** Safa Réjichi  
+**Mail :** talel.chaanbi@etudiant-isi.utm.tn  
+**Réalisé par :** CHAANBI Talel
 
 ## Objectifs
 
@@ -94,6 +90,7 @@ ENTRYPOINT service mariadb start && mysql < /articles.sql && apache2ctl -D FOREG
 **Expliquez le contenu du Dockerfile :**
 
 > ✏️ **Réponse :**
+>
 > - `FROM ubuntu:latest` : image de base Ubuntu.
 > - Installation d’Apache (`apache2`) pour le serveur Web.
 > - Installation de MariaDB pour la base de données.
@@ -300,6 +297,7 @@ docker exec my_lamp_c ip add
 docker login
 ```
 ![alt text](image-20.png)
+*Figure 17 : Connexion au compte Docker Hub (`docker login`)*
 
 3. Vérifier la présence de l’image locale :
 
@@ -307,6 +305,7 @@ docker login
 docker images
 ```
 ![alt text](image-21.png)
+*Figure 18 : Vérification de la présence de l’image locale (`docker images`)*
 
 
 4. Tagger l’image :
@@ -322,7 +321,7 @@ docker images
 ```
 
 ![alt text](image-22.png)
-*Figure 17 : Connexion à Docker Hub et ajout du tag à `my_lamp`*
+*Figure 19 : Tag de l’image et vérification dans la liste des images*
 
 ---
 
@@ -331,14 +330,16 @@ docker images
 ```bash
 docker push talelchaanbi/my_lamp:first
 ```
+
 ![alt text](image-23.png)
+*Figure 20 : Exécution de la commande `docker push` vers Docker Hub*
 
 **Vérification :**
 
 > ✏️ **Réponse :** l’image est visible dans le repository Docker Hub après le `push`.
 
 ![alt text](image-24.png)
-*Figure 18 : Publication de l’image sur Docker Hub*
+*Figure 21 : Image `my_lamp` publiée et visible sur Docker Hub*
 
 ---
 
@@ -360,7 +361,7 @@ docker push talelchaanbi/my_lamp:first
 ## Modifications apportées au TP
 
 ![alt text](<Screenshot from 2026-03-17 13-00-21.png>)
-*Figure 19 : Capture d’écran montrant le problème détecté lors du démarrage (import SQL échoué)*
+*Figure 22 : Capture d’écran montrant le problème détecté lors du démarrage (import SQL échoué)*
 
 Pour améliorer la robustesse et la maintenabilité de la stack LAMP fournie, nous avons apporté les modifications suivantes :
 
@@ -373,12 +374,12 @@ Motifs : fiabilité du démarrage (éviter les erreurs d'import SQL causées par
 Captures :
 
 ![alt text](image-3.png)
-*Figure 20 : Contenu du script `start.sh` ajouté*
+*Figure 23 : Contenu du script `start.sh` ajouté*
 
 ![alt text](image-4.png)
-*Figure 21 : Extrait du `Dockerfile` montrant la copie et l'ENTRYPOINT*
+*Figure 24 : Extrait du `Dockerfile` montrant la copie et l'ENTRYPOINT*
 
 ![alt text](image-2.png)
-*Figure 22 : Exemple de sortie de `docker build` / `docker run` montrant l'image `my_lamp` démarrée*
+*Figure 25 : Exemple de sortie de `docker build` / `docker run` montrant l'image `my_lamp` démarrée*
 
 
