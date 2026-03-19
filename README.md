@@ -40,12 +40,6 @@ Ce dépôt rassemble deux supports pédagogiques sur Docker, pensés pour un usa
 - Lire ensuite [TP2_Docker.md](TP2%3A%20Conteneurisation%20d%E2%80%99une%20application%20Web/TP2_Docker.md) pour l’exemple complet de stack LAMP.
 - Dans le dossier TP2, le fichier [Dockerfile](TP2%3A%20Conteneurisation%20d%E2%80%99une%20application%20Web/Dockerfile) décrit la construction de l’image.
 
-## Pour une publication GitHub/LinkedIn
-
-- Garder ce README comme page d’accueil du dépôt.
-- Utiliser des messages courts et pédagogiques dans la description du dépôt.
-- Mettre en avant les compétences démontrées: Docker, conteneurisation, volumes, réseau et stack LAMP.
-
 ## Auteur
 
 - **Réalisé par :** Talel Chaanbi
